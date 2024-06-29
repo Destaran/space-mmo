@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+  client:
+    image: client
+    build:
+      context: client
+      target: dev
+    volumes:
+      - ./client/index.html:/app/index.html
+      - ./client/vite.config.ts:/app/vite.config.ts
+      - ./client/tsconfig.json:/app/tsconfig.json
+      - ./client/public:/app/public
+      - ./client/src:/app/src
+    ports:
+      - 5173:5173
+    depends_on:
+      - server
+  server:
+    image: server
+    build:
+      context: server
+      target: dev
+    volumes:
+      - ./server/src:/server/src
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DATABASE: mmo-dev
+      ENVIRONMENT: dev
+      PORT: 3000
+      AUTH0_ISSUER_URL:
+      AUTH0_AUDIENCE:
+    depends_on:
+      - db
+  db:
+    platform: linux/amd64
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: mmo-dev
+    ports:
+      - 6543:6543
