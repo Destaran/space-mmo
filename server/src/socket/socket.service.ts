@@ -10,7 +10,12 @@ export class SocketService {
     this.connectedClients.set(clientId, socket);
 
     socket.on('disconnect', () => {
+      console.log('Client disconnected:', clientId);
       this.connectedClients.delete(clientId);
+    });
+
+    socket.on('connect', () => {
+      console.log('Client connected:', clientId);
     });
 
     // Handle other events and messages from the client

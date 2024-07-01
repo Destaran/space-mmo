@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SocketModule } from './socket/socket.module';
+import { SolarSystemModule } from './solar-system/solar-system.module';
 
 @Module({
-  imports: [SocketModule],
+  imports: [SocketModule, SolarSystemModule],
   controllers: [AppController],
   providers: [AppService],
 })
