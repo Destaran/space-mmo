@@ -28,7 +28,7 @@ export class SocketGateway implements OnGatewayConnection {
     const UPDATE_INTERVAL = 1000 / 1; // 60 updates per second
 
     setInterval(() => {
-      this.solarSystemService.updatePlanetPositions(UPDATE_INTERVAL / 1000); // convert ms to seconds
+      this.solarSystemService.updatePlanetPositions(); // convert ms to seconds
       this.broadcastPlanetPositions();
     }, UPDATE_INTERVAL);
   }
@@ -36,6 +36,7 @@ export class SocketGateway implements OnGatewayConnection {
   broadcastPlanetPositions() {
     const planets = this.solarSystemService.getPlanets();
     this.server.emit('planetPositions', planets);
+    console.log(planets);
   }
 
   // Implement other Socket.IO event handlers and message handlers
