@@ -9,11 +9,13 @@ interface MeshProps {
 }
 
 export function PlanetMesh({ planet }: MeshProps) {
-  const { name, position } = planet;
-  const v3Pos = new Vector3(position.x, position.y, position.z);
+  const { name, position, scale } = planet;
   const grpRef = useRef<Group>(null);
 
-  const gltf = useGLTF(`/glb/${name}.glb`);
+  const gltfPath = `/glb/${name}.glb`;
+  const gltf = useGLTF(gltfPath);
+
+  const v3Pos = new Vector3(position.x, position.y, position.z);
   const mesh = gltf.scene.getObjectByName(name) as Mesh;
 
   useFrame(() => {
@@ -24,7 +26,7 @@ export function PlanetMesh({ planet }: MeshProps) {
   });
 
   return (
-    <group dispose={null} scale={planet.scale} position={v3Pos} ref={grpRef}>
+    <group dispose={null} scale={scale} position={v3Pos} ref={grpRef}>
       <mesh geometry={mesh.geometry} material={mesh.material} />
     </group>
   );
