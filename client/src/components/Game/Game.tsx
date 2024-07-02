@@ -37,9 +37,9 @@ export function Game() {
             near={0.001}
           />
           <OrbitControls target={sunPos} maxDistance={10000} />
-          <ambientLight intensity={2} />
-          {/* <pointLight position={[0, 0, 0]} intensity={22.5} castShadow /> */}
-          <Environment files="./hdr.hdr" background blur={0.01} />
+          <ambientLight intensity={0.1} />
+          <pointLight position={sunPos} intensity={500000} castShadow />
+          <Environment files="./hdr.hdr" background blur={0.02} />
           <Ring />
           <group>
             <Sun position={sunPos} scale={116.955} />
