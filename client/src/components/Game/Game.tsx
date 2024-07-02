@@ -34,7 +34,7 @@ export function Game() {
             makeDefault
             position={defCamPos}
             far={1000000}
-            near={0.001}
+            near={0.1}
           />
           <OrbitControls target={sunPos} maxDistance={10000} />
           <ambientLight intensity={0.1} />

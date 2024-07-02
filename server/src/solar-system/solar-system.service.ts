@@ -25,7 +25,7 @@ export class SolarSystemService {
       name: 'UFO',
       position: { x: 0, y: 0, z: 0 },
       radius: 400,
-      scale: 10,
+      scale: 50,
       velocity: 0.2,
     },
   ];
