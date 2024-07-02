@@ -11,7 +11,7 @@ export class SolarSystemService {
   private planets: Planet[] = [
     {
       id: '1',
-      name: 'Chirico',
+      name: 'Mercury',
       position: { x: 0, y: 0, z: 0 },
     },
   ];
@@ -37,7 +37,7 @@ export class SolarSystemService {
 
   updatePlanetPositions() {
     this.planets.forEach((planet) => {
-      planet.position = this.getOrbitalPosition(1, Date.now(), 2 * Math.PI);
+      planet.position = this.getOrbitalPosition(110, Date.now(), 10 * Math.PI);
     });
   }
 }
