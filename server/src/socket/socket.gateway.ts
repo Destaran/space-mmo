@@ -21,22 +21,22 @@ export class SocketGateway implements OnGatewayConnection {
     this.socketService.handleConnection(socket);
   }
 
+  update() {
+    this.solarSystemService.updatePlanets();
+    this.broadcastPlanets();
+  }
+
   onModuleInit() {
-    this.server.on('connection', (socket) => {
-      console.log('Client connected:', socket.id);
-    });
-    const UPDATE_INTERVAL = 1000 / 1; // 60 updates per second
+    const UPDATE_INTERVAL = 1000 / 60; // 60 updates per second
 
     setInterval(() => {
-      this.solarSystemService.updatePlanetPositions(); // convert ms to seconds
-      this.broadcastPlanetPositions();
+      this.update();
     }, UPDATE_INTERVAL);
   }
 
-  broadcastPlanetPositions() {
+  broadcastPlanets() {
     const planets = this.solarSystemService.getPlanets();
     this.server.emit('planetPositions', planets);
-    console.log(planets);
   }
 
   // Implement other Socket.IO event handlers and message handlers
