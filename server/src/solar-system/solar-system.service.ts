@@ -4,6 +4,8 @@ export interface Planet {
   id: string;
   name: string;
   position: { x: number; y: number; z: number };
+  radius: number;
+  scale: number;
 }
 
 @Injectable()
@@ -13,6 +15,15 @@ export class SolarSystemService {
       id: '1',
       name: 'Mercury',
       position: { x: 0, y: 0, z: 0 },
+      radius: 210,
+      scale: 0.1,
+    },
+    {
+      id: '2',
+      name: 'UFO',
+      position: { x: 0, y: 0, z: 0 },
+      radius: 400,
+      scale: 10,
     },
   ];
 
@@ -21,23 +32,27 @@ export class SolarSystemService {
   }
 
   getOrbitalPosition(radius: number, timestamp = Date.now(), velocity: number) {
-    // Angular velocity (radians per millisecond)
-    // Assuming velocity is given in radians per second
     const angularVelocity = velocity / 1000;
-
-    // Calculate the total angle rotated since timestamp 0
     const theta = angularVelocity * timestamp;
 
-    // Calculate x and y coordinates
     const x = radius * Math.cos(theta);
-    const y = radius * Math.sin(theta);
+    const y = 0;
+    const z = radius * Math.sin(theta);
 
-    return { x: Number(x.toFixed(3)), y: Number(y.toFixed(2)), z: 0 };
+    return {
+      x: Number(x.toFixed(3)),
+      y: y,
+      z: Number(z.toFixed(2)),
+    };
   }
 
-  updatePlanetPositions() {
+  updatePlanets() {
     this.planets.forEach((planet) => {
-      planet.position = this.getOrbitalPosition(110, Date.now(), 10 * Math.PI);
+      planet.position = this.getOrbitalPosition(
+        planet.radius,
+        Date.now(),
+        0.1 * Math.PI,
+      );
     });
   }
 }

@@ -21,11 +21,10 @@ export function PlanetMesh({ planet }: MeshProps) {
       return;
     }
     grpRef.current?.position.set(position.x, position.y, position.z);
-    console.log(grpRef.current?.position);
   });
 
   return (
-    <group dispose={null} scale={0.1} position={v3Pos} ref={grpRef}>
+    <group dispose={null} scale={planet.scale} position={v3Pos} ref={grpRef}>
       <mesh geometry={mesh.geometry} material={mesh.material} />
     </group>
   );
