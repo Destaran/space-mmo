@@ -6,6 +6,7 @@ export interface Planet {
   position: { x: number; y: number; z: number };
   radius: number;
   scale: number;
+  velocity: number;
 }
 
 @Injectable()
@@ -17,6 +18,7 @@ export class SolarSystemService {
       position: { x: 0, y: 0, z: 0 },
       radius: 210,
       scale: 0.1,
+      velocity: 0.1,
     },
     {
       id: '2',
@@ -24,6 +26,7 @@ export class SolarSystemService {
       position: { x: 0, y: 0, z: 0 },
       radius: 400,
       scale: 10,
+      velocity: 0.2,
     },
   ];
 
@@ -51,7 +54,7 @@ export class SolarSystemService {
       planet.position = this.getOrbitalPosition(
         planet.radius,
         Date.now(),
-        0.1 * Math.PI,
+        planet.velocity,
       );
     });
   }
