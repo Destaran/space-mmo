@@ -21,7 +21,7 @@ export function SolarSystem() {
       />
       <OrbitControls target={center} maxDistance={10000} />
       <ambientLight intensity={0.1} />
-      <pointLight position={center} intensity={500000} castShadow />
+      <pointLight position={center} intensity={300000} />
       <Environment files="./hdr.hdr" background blur={0.02} />
       <Ring />
       <group>
