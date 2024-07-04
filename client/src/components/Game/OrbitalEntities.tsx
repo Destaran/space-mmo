@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Orbitals } from "../../socket.type";
 import { socket } from "../../socket";
-import { PlanetMesh } from "./Entities/PlanetMesh";
+import { Planet } from "./Entities/Planet";
 
 export function OrbitalEntities() {
   const [orbitals, setOrbitals] = useState<Orbitals | null>(null);
@@ -26,7 +26,7 @@ export function OrbitalEntities() {
   return (
     <>
       {planets.map((planet) => {
-        return <PlanetMesh key={planet.name} planet={planet} />;
+        return <Planet key={planet.name} planet={planet} />;
       })}
     </>
   );
