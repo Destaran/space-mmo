@@ -1,3 +1,7 @@
+export interface Orbitals {
+  planets: Planet[];
+}
+
 export interface Planet {
   id: string;
   name: string;
@@ -5,8 +9,24 @@ export interface Planet {
   radius: number;
   scale: number;
 }
+
+export interface Orbitals {
+  planets: Planet[];
+}
+
+export interface Statics {
+  sun: Sun;
+}
+
+export interface Sun {
+  id: string;
+  name: string;
+  position: { x: number; y: number; z: number };
+  scale: number;
+}
 export interface ServerToClientEvents {
-  planetPositions: (planets: Planet[]) => void;
+  orbitalPositions: (orbitals: Orbitals) => void;
+  staticPositions: (staticEntities: Statics) => void;
 }
 
 export interface ClientToServerEvents {}

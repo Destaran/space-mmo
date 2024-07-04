@@ -22,22 +22,27 @@ export class SocketGateway implements OnGatewayConnection {
   }
 
   update() {
-    this.solarSystemService.updatePlanets();
-    this.broadcastPlanets();
+    this.solarSystemService.updateOrbitals();
+    this.broadcastOrbitals();
+    this.broadcastStatic();
   }
 
   onModuleInit() {
-    const UPDATE_INTERVAL = 1000 / 60; // 60 updates per second
+    const UPDATE_PER_SEC = 60;
+    const UPDATE_INTERVAL = 1000 / UPDATE_PER_SEC;
 
     setInterval(() => {
       this.update();
     }, UPDATE_INTERVAL);
   }
 
-  broadcastPlanets() {
-    const planets = this.solarSystemService.getPlanets();
-    this.server.emit('planetPositions', planets);
+  broadcastOrbitals() {
+    const orbitals = this.solarSystemService.getOrbitals();
+    this.server.emit('orbitalPositions', orbitals);
   }
 
-  // Implement other Socket.IO event handlers and message handlers
+  broadcastStatic() {
+    const statics = this.solarSystemService.getStatics();
+    this.server.emit('staticPositions', statics);
+  }
 }
