@@ -28,7 +28,7 @@ export class SocketGateway implements OnGatewayConnection {
   }
 
   onModuleInit() {
-    const UPDATE_PER_SEC = 60;
+    const UPDATE_PER_SEC = 1;
     const UPDATE_INTERVAL = 1000 / UPDATE_PER_SEC;
 
     setInterval(() => {
