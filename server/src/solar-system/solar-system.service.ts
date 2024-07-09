@@ -38,7 +38,7 @@ export class SolarSystemService {
     this.planets.forEach((planet) => {
       planet.position = this.getOrbitalPosition(
         planet.radius,
-        Date.now(),
+        1720082549000,
         planet.velocity,
       );
     });

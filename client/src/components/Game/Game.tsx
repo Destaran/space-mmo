@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import styled from "styled-components";
 import { Loader } from "./Loader";
 import { SolarSystem } from "./SolarSystem";
+import { Hud } from "./Hud/Hud";
 
 const Container = styled.div`
   display: flex;
@@ -22,6 +23,7 @@ export function Game() {
           <SolarSystem />
         </Suspense>
       </Canvas>
+      <Hud />
     </Container>
   );
 }

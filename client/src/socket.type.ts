@@ -27,6 +27,7 @@ export interface Sun {
 export interface ServerToClientEvents {
   orbitalPositions: (orbitals: Orbitals) => void;
   staticPositions: (staticEntities: Statics) => void;
+  time: (time: number) => void;
 }
 
 export interface ClientToServerEvents {}

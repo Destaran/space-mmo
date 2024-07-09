@@ -25,10 +25,11 @@ export class SocketGateway implements OnGatewayConnection {
     this.solarSystemService.updateOrbitals();
     this.broadcastOrbitals();
     this.broadcastStatic();
+    this.broadcastTime();
   }
 
   onModuleInit() {
-    const UPDATE_PER_SEC = 1;
+    const UPDATE_PER_SEC = 2;
     const UPDATE_INTERVAL = 1000 / UPDATE_PER_SEC;
 
     setInterval(() => {
@@ -44,5 +45,10 @@ export class SocketGateway implements OnGatewayConnection {
   broadcastStatic() {
     const statics = this.solarSystemService.getStatics();
     this.server.emit('staticPositions', statics);
+  }
+
+  broadcastTime() {
+    const time = Date.now();
+    this.server.emit('time', time);
   }
 }
