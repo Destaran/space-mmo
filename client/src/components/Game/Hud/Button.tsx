@@ -5,7 +5,6 @@ const ButtonElement = styled.button`
   color: white;
   border: 1px solid rgba(119, 119, 119, 0.8);
   padding: 0.25rem;
-  margin: 0.25rem;
 
   &:hover {
     background-color: rgba(0, 77, 155, 0.9);
