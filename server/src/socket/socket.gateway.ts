@@ -2,10 +2,13 @@ import {
   WebSocketGateway,
   OnGatewayConnection,
   WebSocketServer,
+  SubscribeMessage,
+  MessageBody,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 import { SocketService } from './socket.service';
 import { SolarSystemService } from 'src/solar-system/solar-system.service';
+import { TimeService } from 'src/time/time.service';
 
 @WebSocketGateway({ cors: true })
 export class SocketGateway implements OnGatewayConnection {
@@ -15,10 +18,21 @@ export class SocketGateway implements OnGatewayConnection {
   constructor(
     private readonly socketService: SocketService,
     private readonly solarSystemService: SolarSystemService,
+    private readonly timeService: TimeService,
   ) {}
 
   handleConnection(socket: Socket): void {
     this.socketService.handleConnection(socket);
+  }
+
+  @SubscribeMessage('freezeTime')
+  handleFreezeTime(@MessageBody() timestamp: number) {
+    this.timeService.freezeTime(timestamp);
+  }
+
+  @SubscribeMessage('unfreezeTime')
+  handleUnfreezeTime() {
+    this.timeService.unfreezeTime();
   }
 
   update() {
@@ -48,7 +62,7 @@ export class SocketGateway implements OnGatewayConnection {
   }
 
   broadcastTime() {
-    const time = Date.now();
+    const time = this.timeService.getTime();
     this.server.emit('time', time);
   }
 }

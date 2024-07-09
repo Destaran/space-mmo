@@ -30,4 +30,7 @@ export interface ServerToClientEvents {
   time: (time: number) => void;
 }
 
-export interface ClientToServerEvents {}
+export interface ClientToServerEvents {
+  freezeTime: (time: number) => void;
+  unfreezeTime: () => void;
+}

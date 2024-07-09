@@ -1,11 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { Orbitals, Planet, Statics, Sun } from './solar-system.type';
 import { planetData, sunData } from './solar-system.data';
+import { TimeService } from 'src/time/time.service';
 
 @Injectable()
 export class SolarSystemService {
   private planets: Planet[] = planetData;
   private sun: Sun = sunData;
+
+  constructor(private readonly timeService: TimeService) {}
 
   getStatics(): Statics {
     return {
@@ -35,10 +38,11 @@ export class SolarSystemService {
   }
 
   updateOrbitals() {
+    const time = this.timeService.getTime();
     this.planets.forEach((planet) => {
       planet.position = this.getOrbitalPosition(
         planet.radius,
-        1720082549000,
+        time,
         planet.velocity,
       );
     });
