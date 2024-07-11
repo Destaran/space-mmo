@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DevConsole } from "./DevConsole";
+import { DevTools } from "./DevTools/DevTools";
 
 const Container = styled.div`
   position: absolute;
@@ -11,7 +11,7 @@ const Container = styled.div`
 export function Hud() {
   return (
     <Container>
-      <DevConsole />
+      <DevTools />
     </Container>
   );
 }
