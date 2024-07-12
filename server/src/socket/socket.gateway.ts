@@ -9,11 +9,15 @@ import { Socket } from 'socket.io';
 import { SocketService } from './socket.service';
 import { SolarSystemService } from 'src/solar-system/solar-system.service';
 import { TimeService } from 'src/time/time.service';
+import { OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 
 @WebSocketGateway({ cors: true })
-export class SocketGateway implements OnGatewayConnection {
+export class SocketGateway
+  implements OnGatewayConnection, OnModuleInit, OnModuleDestroy
+{
   @WebSocketServer()
   private server: Socket;
+  private interval: NodeJS.Timeout | null;
 
   constructor(
     private readonly socketService: SocketService,
@@ -46,9 +50,14 @@ export class SocketGateway implements OnGatewayConnection {
     const UPDATE_PER_SEC = 2;
     const UPDATE_INTERVAL = 1000 / UPDATE_PER_SEC;
 
-    setInterval(() => {
+    this.interval = setInterval(() => {
       this.update();
     }, UPDATE_INTERVAL);
+  }
+
+  onModuleDestroy() {
+    clearInterval(this.interval);
+    this.interval = null;
   }
 
   broadcastOrbitals() {
