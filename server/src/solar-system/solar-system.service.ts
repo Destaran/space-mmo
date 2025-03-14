@@ -8,7 +8,7 @@ export class SolarSystemService {
   private planets: Planet[] = planetData;
   private sun: Sun = sunData;
 
-  constructor(private readonly timeService: SchedulerService) {}
+  constructor(private readonly schedulerService: SchedulerService) {}
 
   getStatics(): Statics {
     return {
@@ -38,7 +38,7 @@ export class SolarSystemService {
   }
 
   updateOrbitals() {
-    const time = this.timeService.getTime();
+    const time = this.schedulerService.getTime();
     this.planets.forEach((planet) => {
       planet.position = this.getOrbitalPosition(
         planet.radius,

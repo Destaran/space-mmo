@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { SchedulerService } from './scheduler.service';
 
-describe('TimeService', () => {
+describe('SchedulerService', () => {
   let service: SchedulerService;
 
   beforeEach(async () => {

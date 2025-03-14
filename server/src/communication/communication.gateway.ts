@@ -22,7 +22,7 @@ export class SocketGateway
   constructor(
     private readonly socketService: CommunicationService,
     private readonly solarSystemService: SolarSystemService,
-    private readonly timeService: SchedulerService,
+    private readonly schedulerService: SchedulerService,
   ) {}
 
   handleConnection(socket: Socket): void {
@@ -31,12 +31,12 @@ export class SocketGateway
 
   @SubscribeMessage('freezeTime')
   handleFreezeTime(@MessageBody() timestamp: number) {
-    this.timeService.freezeTime(timestamp);
+    this.schedulerService.freezeTime(timestamp);
   }
 
   @SubscribeMessage('unfreezeTime')
   handleUnfreezeTime() {
-    this.timeService.unfreezeTime();
+    this.schedulerService.unfreezeTime();
   }
 
   update() {
@@ -71,7 +71,7 @@ export class SocketGateway
   }
 
   broadcastTime() {
-    const time = this.timeService.getTime();
+    const time = this.schedulerService.getTime();
     this.server.emit('time', time);
   }
 }
