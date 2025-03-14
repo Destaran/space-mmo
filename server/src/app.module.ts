@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { SocketModule } from './socket/socket.module';
+import { CommunicationModule } from './communication/communication.module';
 import { SolarSystemModule } from './solar-system/solar-system.module';
-import { TimeModule } from './time/time.module';
+import { SchedulerModule } from './time/scheduler.module';
 
 @Module({
-  imports: [SocketModule, SolarSystemModule, TimeModule],
+  imports: [CommunicationModule, SolarSystemModule, SchedulerModule],
   controllers: [AppController],
   providers: [AppService],
 })

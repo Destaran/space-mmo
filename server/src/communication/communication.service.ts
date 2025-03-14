@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Socket } from 'socket.io';
 
 @Injectable()
-export class SocketService {
+export class CommunicationService {
   private readonly connectedClients: Map<string, Socket> = new Map();
 
   handleConnection(socket: Socket): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class TimeService {
+export class SchedulerService {
   private startTime: number = Date.now();
   private freezeTimestamp: number | null = null;
 

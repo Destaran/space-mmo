@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
 
 @Controller('time')
-export class TimeController {
+export class SchedulerController {
   constructor() {}
 }

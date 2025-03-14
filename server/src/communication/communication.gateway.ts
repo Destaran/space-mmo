@@ -6,9 +6,9 @@ import {
   MessageBody,
 } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
-import { SocketService } from './socket.service';
+import { CommunicationService } from './communication.service';
 import { SolarSystemService } from 'src/solar-system/solar-system.service';
-import { TimeService } from 'src/time/time.service';
+import { SchedulerService } from 'src/time/scheduler.service';
 import { OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 
 @WebSocketGateway({ cors: true })
@@ -20,9 +20,9 @@ export class SocketGateway
   private interval: NodeJS.Timeout | null;
 
   constructor(
-    private readonly socketService: SocketService,
+    private readonly socketService: CommunicationService,
     private readonly solarSystemService: SolarSystemService,
-    private readonly timeService: TimeService,
+    private readonly timeService: SchedulerService,
   ) {}
 
   handleConnection(socket: Socket): void {

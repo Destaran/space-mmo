@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { SolarSystemController } from './solar-system.controller';
 import { SolarSystemService } from './solar-system.service';
-import { SocketService } from 'src/socket/socket.service';
-import { TimeService } from 'src/time/time.service';
+import { CommunicationService } from 'src/communication/communication.service';
+import { SchedulerService } from 'src/time/scheduler.service';
 
 @Module({
   controllers: [SolarSystemController],
-  providers: [SolarSystemService, SocketService, TimeService],
+  providers: [SolarSystemService, CommunicationService, SchedulerService],
 })
 export class SolarSystemModule {}
